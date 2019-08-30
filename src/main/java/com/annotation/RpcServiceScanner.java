@@ -1,6 +1,4 @@
-package com.tracker;
-
-import com.annotation.RpcService;
+package com.annotation;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -9,14 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RpcServiceScanner {
-    // 默认扫描的包路径
-    private static final String SCAN_PACKAGE = "com.service.impl";
-
     /**
      * 扫描指定包路径下的添加了@RpcService注解的类
      *
      * @param packagePath 需要扫描的包路径
-     * @return List<Class>
+     * @return 添加了@RpcService注解的类
      */
     public static List<Class> getRpcClass(String packagePath) {
         URL packageUrl = ClassLoader.getSystemClassLoader().getResource(packagePath.replace(".", "/"));
@@ -28,6 +23,14 @@ public class RpcServiceScanner {
             return new ArrayList<Class>();
         }
         return scanRpcClass(file, packagePath);
+    }
+
+    public static List<Class> getRpcClass(String[] packages) {
+        List<Class> list = new ArrayList<Class>();
+        for (String packagePath : packages) {
+            list.addAll(getRpcClass(packagePath));
+        }
+        return list;
     }
 
     /**
