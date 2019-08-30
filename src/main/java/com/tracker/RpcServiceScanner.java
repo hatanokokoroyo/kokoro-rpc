@@ -14,6 +14,7 @@ public class RpcServiceScanner {
 
     /**
      * 扫描指定包路径下的添加了@RpcService注解的类
+     *
      * @param packagePath 需要扫描的包路径
      * @return List<Class>
      */
@@ -81,12 +82,4 @@ public class RpcServiceScanner {
         }
         return target;
     }
-
-
-//    public static void main(String[] args) {
-//        List<Class> rpcClass = RpcServiceScanner.getRpcClass(SCAN_PACKAGE);
-//        for (Class aClass : rpcClass) {
-//            System.out.println(aClass.getName());
-//        }
-//    }
 }
